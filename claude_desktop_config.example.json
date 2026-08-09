@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "provekit": {
+      "command": "python",
+      "args": ["-m", "provekit_mcp.server"],
+      "env": {
+        "PROVEKIT_MCP_ROOT": "/absolute/path/to/the/repo/you/want/scannable"
+      }
+    }
+  }
+}

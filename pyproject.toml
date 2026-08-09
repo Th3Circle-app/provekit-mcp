@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "provekit-mcp"
+version = "0.1.0"
+description = "A hardened MCP server that gives an AI agent a code security scanner, built so the tools cannot be turned against the host, with its own red-team suite proving the trust boundaries hold."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Harrison C. Songolo" }]
+keywords = ["mcp", "security", "red-team", "appsec", "ai-security", "sast", "owasp"]
+dependencies = ["mcp>=2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+provekit-mcp = "provekit_mcp.server:main"
+
+[tool.setuptools]
+packages = ["provekit_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

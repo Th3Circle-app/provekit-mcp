@@ -1,0 +1,96 @@
+{
+  "counts": {
+    "HELD": 9,
+    "BREACH": 0,
+    "OK": 3,
+    "REGRESSION": 0,
+    "INCONCLUSIVE": 0
+  },
+  "clean": true,
+  "results": [
+    {
+      "name": "handshake + tools/list",
+      "kind": "control",
+      "outcome": "OK",
+      "detail": "server exposed tools: ['scan_code', 'scan_path']",
+      "evidence": ""
+    },
+    {
+      "name": "path traversal",
+      "kind": "attack",
+      "outcome": "HELD",
+      "detail": "refused with code='escape'",
+      "evidence": "path escapes the workspace root"
+    },
+    {
+      "name": "deep traversal",
+      "kind": "attack",
+      "outcome": "HELD",
+      "detail": "refused with code='escape'",
+      "evidence": "path escapes the workspace root"
+    },
+    {
+      "name": "absolute path",
+      "kind": "attack",
+      "outcome": "HELD",
+      "detail": "refused with code='absolute'",
+      "evidence": "absolute paths are not allowed"
+    },
+    {
+      "name": "symlink escape",
+      "kind": "attack",
+      "outcome": "HELD",
+      "detail": "refused with code='escape'",
+      "evidence": "path escapes the workspace root"
+    },
+    {
+      "name": "null-byte truncation",
+      "kind": "attack",
+      "outcome": "HELD",
+      "detail": "refused with code='null-byte'",
+      "evidence": "null byte in path"
+    },
+    {
+      "name": "binary file read",
+      "kind": "attack",
+      "outcome": "HELD",
+      "detail": "refused with code='binary'",
+      "evidence": "file looks binary, not source"
+    },
+    {
+      "name": "resource exhaustion (6 MB input)",
+      "kind": "attack",
+      "outcome": "HELD",
+      "detail": "refused with code='too-large'  [61 ms]",
+      "evidence": "input too large: 6000000 bytes exceeds the 5000000-byte per-call limit"
+    },
+    {
+      "name": "ReDoS pathological line",
+      "kind": "attack",
+      "outcome": "HELD",
+      "detail": "answered in 6 ms, no hang",
+      "evidence": ""
+    },
+    {
+      "name": "argument-as-code is inert",
+      "kind": "attack",
+      "outcome": "HELD",
+      "detail": "malicious argument was scanned as text, not executed",
+      "evidence": "findings=['eval']"
+    },
+    {
+      "name": "legit scan_path finds the planted vuln",
+      "kind": "control",
+      "outcome": "OK",
+      "detail": "scanned app.py inside root, findings=['py-command-interp']",
+      "evidence": ""
+    },
+    {
+      "name": "legit scan_code stays quiet on clean code",
+      "kind": "control",
+      "outcome": "OK",
+      "detail": "clean snippet -> 0 findings",
+      "evidence": ""
+    }
+  ]
+}
