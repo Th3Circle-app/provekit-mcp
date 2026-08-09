@@ -101,6 +101,7 @@ def test_js_pattern_negative(text):
     ("os.system(f'rm -rf {userdir}')", "py-command-interp"),
     ("os.system('cat ' + path)", "py-command-interp"),
     ("subprocess.run(cmd, shell=True)", "py-subprocess-shell"),
+    ("subprocess.run(shlex.split(cmd), shell=True)", "py-subprocess-shell"),  # nested call before shell=True
     ("data = pickle.loads(payload)", "py-pickle-load"),
     ("cfg = yaml.load(open('c.yml'))", "py-yaml-unsafe"),
     ("r = requests.get(u, verify=False)", "py-requests-noverify"),

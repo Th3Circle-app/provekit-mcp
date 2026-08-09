@@ -120,8 +120,11 @@ _PY_CMD_INTERP = re.compile(
     r"os\.system\s*\(\s*(?:f['\"][^'\"]{0,300}\{|['\"][^'\"]{0,300}['\"]\s*[%+]|"
     r"['\"][^'\"]{0,300}['\"]\.format\s*\()"
 )
+# Non-greedy across anything but a newline (bounded) so a nested call like
+# subprocess.run(shlex.split(cmd), shell=True) is still caught, where a
+# [^)] bound would stop at the inner ')' and miss it.
 _PY_SHELL_TRUE = re.compile(
-    r"subprocess\.(?:call|run|Popen|check_output|check_call)\s*\([^)]{0,200}"
+    r"subprocess\.(?:call|run|Popen|check_output|check_call)\s*\([^\n]{0,200}?"
     r"shell\s*=\s*True",
     re.IGNORECASE,
 )
