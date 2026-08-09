@@ -74,7 +74,15 @@ It is built to be **precise**, because a scanner that cries wolf is a scanner yo
 ```bash
 git clone https://github.com/Th3Circle-app/provekit-mcp && cd provekit-mcp
 python -m venv .venv && source .venv/bin/activate
-pip install -e .
+pip install .          # installs the `provekit-mcp` entrypoint
+```
+
+For development, you can also run it straight from the repo without installing:
+
+```bash
+pip install mcp>=2.0
+python -m provekit_mcp.server        # run from the repo root
+pytest -q                            # 97 tests, incl. the live red-team
 ```
 
 Add it to Claude Desktop / Claude Code (`claude_desktop_config.json`), pointing the workspace root at the repo you want scannable, see [`claude_desktop_config.example.json`](claude_desktop_config.example.json):

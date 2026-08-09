@@ -69,8 +69,11 @@ def build_sandbox() -> dict:
 
 def result_payload(call_result) -> dict:
     """Pull the tool's structured dict back out of an MCP CallToolResult,
-    whether it came as structured content or as a JSON text block."""
-    sc = getattr(call_result, "structuredContent", None)
+    whether it came as structured content or as a JSON text block. The SDK
+    exposes it as `structured_content`; older/other clients used
+    `structuredContent`, so try both, then fall back to the text block."""
+    sc = (getattr(call_result, "structured_content", None)
+          or getattr(call_result, "structuredContent", None))
     if isinstance(sc, dict):
         # MCP may wrap a bare return under {"result": ...}
         return sc.get("result", sc) if set(sc.keys()) == {"result"} else sc
