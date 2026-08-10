@@ -30,7 +30,7 @@ def clean(text, file="x.js"):
     ("key='sk-abcdef1234567890ABCDEFGHIJ'", "openai-key"),
     ("k='sk-ant-api03-abcdefghij1234567890'", "anthropic-key"),
     ("xoxb-123456789012-abcdefghijkl", "slack-token"),
-    ("AIzaSyA1234567890abcdefghijklmnopqrstuv", "google-api-key"),
+    ("AIza" + "SyA1234567890abcdefghijklmnopqrstuv", "google-api-key"),  # split so it's not a real-looking token on disk
     ("url='postgres://admin:hunter2@db:5432/prod'", "db-url-creds"),
     ("const password = 'super-secret-9'", "hardcoded-secret"),
 ])
